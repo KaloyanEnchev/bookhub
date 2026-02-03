@@ -1,0 +1,56 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="text-center mb-4">Create Book</h1>
+    
+    <div class="card shadow-lg border-0 rounded-4 mx-auto" style="max-width: 700px;">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+            <h2 class="mb-0">Book Details</h2>
+        </div>
+        <div class="card-body px-5 py-4">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div class="mb-4">
+                        <label class="form-label fw-bold" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            <div class="text-danger mt-1 small">{{ field.errors }}</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
+                        Create
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .card {
+        border-radius: 1rem;
+        background-color: #ffffff;
+    }
+    .form-control {
+        border-radius: 0.5rem;
+        border: 1px solid #ced4da;
+    }
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 5px rgba(13, 110, 253, 0.25);
+    }
+    .btn:hover {
+        filter: brightness(0.9);
+        transition: filter 0.3s ease;
+    }
+</style>
+{% endblock %}
